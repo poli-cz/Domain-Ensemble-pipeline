@@ -12,7 +12,7 @@ from sklearn.svm import SVC
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
-# 1. Vytvoření mock datové sady
+# 1. Create a mock dataset
 X, y = make_classification(
     n_samples=1000,
     n_features=2,
@@ -27,14 +27,14 @@ X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42
 )
 
-# 2. Jednoduché klasifikátory
+# 2. Simple classifiers
 classifiers = {
     "Logistic Regression": LogisticRegression(),
     "Decision Tree": DecisionTreeClassifier(max_depth=3),
     "SVM": SVC(kernel="linear", probability=True),
 }
 
-# Trénování základních klasifikátorů
+# Train the base classifiers
 predictions = {}
 accuracies = {}
 for name, clf in classifiers.items():
@@ -43,7 +43,7 @@ for name, clf in classifiers.items():
     predictions[name] = pred
     accuracies[name] = accuracy_score(y_test, pred)
 
-# 3. Kombinace metodami
+# 3. Combine methods
 # Bagging - Random Forest
 bagging = RandomForestClassifier(n_estimators=50, random_state=42)
 bagging.fit(X_train, y_train)
@@ -71,44 +71,56 @@ stacking.fit(X_train, y_train)
 stacking_pred = stacking.predict(X_test)
 stacking_accuracy = accuracy_score(y_test, stacking_pred)
 
-# 4. Vizualizace výsledků
+
+# Function to plot decision boundaries
+def plot_decision_boundaries(X, y, model, ax, title):
+    h = 0.02  # Step size in the mesh
+    x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
+    y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1
+
+    xx, yy = np.meshgrid(np.arange(x_min, x_max, h), np.arange(y_min, y_max, h))
+    Z = model.predict(np.c_[xx.ravel(), yy.ravel()])
+    Z = Z.reshape(xx.shape)
+
+    ax.contourf(xx, yy, Z, alpha=0.8, cmap="coolwarm")
+    scatter = ax.scatter(X[:, 0], X[:, 1], c=y, edgecolors="k", cmap="coolwarm", s=30)
+    ax.set_title(title)
+    ax.set_xlabel("Feature 1")
+    ax.set_ylabel("Feature 2")
+    return scatter
+
+
+# 4. Visualization of the results and decision boundaries
+
+# Plot for plain methods (simple classifiers)
 plt.figure(figsize=(12, 4))
 
-# Referenční metody
-for i, (name, pred) in enumerate(predictions.items(), start=1):
-    plt.subplot(1, 3, i)
-    plt.scatter(
-        X_test[:, 0], X_test[:, 1], c=pred, cmap="coolwarm", s=30, edgecolor="k"
+for i, (name, clf) in enumerate(classifiers.items(), start=1):
+    ax = plt.subplot(1, 3, i)
+    plot_decision_boundaries(
+        X_test, y_test, clf, ax, f"{name} (Acc: {accuracies[name]:.3f})"
     )
-    plt.title(f"{name} (Acc: {accuracies[name]:.3f})")
-    plt.xlabel("Feature 1")
-    plt.ylabel("Feature 2")
 
-# Kombinované metody
+plt.tight_layout()
+plt.show()
+
+# Plot for combined methods
+plt.figure(figsize=(12, 4))
+
 methods = {
-    "Bagging (Random Forest)": (bagging_pred, bagging_accuracy),
-    "Boosting (AdaBoost)": (boosting_pred, boosting_accuracy),
-    "Stacking": (stacking_pred, stacking_accuracy),
+    "Bagging (Random Forest)": (bagging, bagging_accuracy),
+    "Boosting (AdaBoost)": (boosting, boosting_accuracy),
+    "Stacking": (stacking, stacking_accuracy),
 }
 
-plt.tight_layout()
-plt.show()
-
-# Přehled výsledků kombinovaných metod
-plt.figure(figsize=(12, 4))
-
-for i, (name, (pred, acc)) in enumerate(methods.items(), start=1):
-    plt.subplot(1, 3, i)
-    plt.scatter(
-        X_test[:, 0], X_test[:, 1], c=pred, cmap="coolwarm", s=30, edgecolor="k"
-    )
-    plt.title(f"{name} (Acc: {acc:.3f})")
-    plt.xlabel("Feature 1")
-    plt.ylabel("Feature 2")
+for i, (name, (clf, acc)) in enumerate(methods.items(), start=1):
+    ax = plt.subplot(1, 3, i)
+    plot_decision_boundaries(X_test, y_test, clf, ax, f"{name} (Acc: {acc:.3f})")
 
 plt.tight_layout()
 plt.show()
 
+# Print the accuracy of each model
 for i, (name, pred) in enumerate(predictions.items(), start=1):
     print(f"{name} accuracy: {accuracies[name]:.3f}")
 
