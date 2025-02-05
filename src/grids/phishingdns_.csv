@@ -1,0 +1,16 @@
+,Model,Accuracy,AUC,Recall,Prec.,F1,Kappa,MCC,TT (Sec),Subset
+knn,K Neighbors Classifier,0.9045,0.8828,0.9045,0.9006,0.9017,0.6522,0.6548,0.977,dns_
+xgboost,Extreme Gradient Boosting,0.9077,0.9097,0.9077,0.9033,0.9017,0.6436,0.655,0.969,dns_
+rf,Random Forest Classifier,0.9023,0.8988,0.9023,0.8985,0.8997,0.6461,0.6481,1.545,dns_
+et,Extra Trees Classifier,0.9013,0.8691,0.9013,0.8975,0.8988,0.6428,0.6448,1.05,dns_
+lightgbm,Light Gradient Boosting Machine,0.9059,0.9081,0.9059,0.9017,0.8986,0.6299,0.6454,0.815,dns_
+dt,Decision Tree Classifier,0.8847,0.8402,0.8847,0.8835,0.8841,0.5984,0.5985,0.654,dns_
+gbc,Gradient Boosting Classifier,0.8792,0.8688,0.8792,0.8768,0.859,0.4655,0.5176,8.883,dns_
+ada,Ada Boost Classifier,0.8507,0.8333,0.8507,0.8374,0.8164,0.2936,0.3591,2.467,dns_
+lda,Linear Discriminant Analysis,0.8392,0.7729,0.8392,0.8158,0.7969,0.2139,0.2793,0.468,dns_
+ridge,Ridge Classifier,0.8257,0.7728,0.8257,0.7836,0.7582,0.0545,0.1176,0.268,dns_
+lr,Logistic Regression,0.8192,0.6808,0.8192,0.723,0.7485,0.0166,0.0325,4.019,dns_
+dummy,Dummy Classifier,0.8239,0.5,0.8239,0.6789,0.7444,0.0,0.0,0.193,dns_
+svm,SVM - Linear Kernel,0.7302,0.6237,0.7302,0.7524,0.7238,0.1076,0.1253,0.329,dns_
+qda,Quadratic Discriminant Analysis,0.435,0.7763,0.435,0.8354,0.4669,0.1219,0.2297,0.347,dns_
+nb,Naive Bayes,0.2208,0.6104,0.2208,0.7824,0.1461,0.0121,0.0544,0.225,dns_

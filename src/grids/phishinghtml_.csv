@@ -1,0 +1,16 @@
+,Model,Accuracy,AUC,Recall,Prec.,F1,Kappa,MCC,TT (Sec),Subset
+lightgbm,Light Gradient Boosting Machine,0.8352,0.6972,0.8352,0.8422,0.773,0.1126,0.2266,1.07,html_
+knn,K Neighbors Classifier,0.8337,0.6684,0.8337,0.827,0.7723,0.1103,0.2109,1.129,html_
+xgboost,Extreme Gradient Boosting,0.8331,0.6934,0.8331,0.8213,0.7722,0.1098,0.2053,0.619,html_
+rf,Random Forest Classifier,0.8298,0.6897,0.8298,0.7987,0.7712,0.107,0.181,1.204,html_
+et,Extra Trees Classifier,0.8295,0.6828,0.8295,0.7972,0.7709,0.1058,0.1784,1.308,html_
+gbc,Gradient Boosting Classifier,0.8345,0.6954,0.8345,0.8474,0.7705,0.1024,0.2203,14.021,html_
+ada,Ada Boost Classifier,0.8325,0.6851,0.8325,0.8331,0.7677,0.0916,0.1971,3.805,html_
+dt,Decision Tree Classifier,0.819,0.6701,0.819,0.7615,0.765,0.0863,0.1238,1.115,html_
+lr,Logistic Regression,0.8236,0.6229,0.8236,0.7397,0.7445,0.0003,0.0055,8.851,html_
+dummy,Dummy Classifier,0.8239,0.5,0.8239,0.6789,0.7444,0.0,0.0,0.218,html_
+ridge,Ridge Classifier,0.8237,0.6496,0.8237,0.6965,0.7443,-0.0003,-0.0029,0.333,html_
+lda,Linear Discriminant Analysis,0.8236,0.6493,0.8236,0.6935,0.7443,-0.0004,-0.004,1.052,html_
+svm,SVM - Linear Kernel,0.699,0.6175,0.699,0.7156,0.6728,0.0199,0.0363,0.484,html_
+nb,Naive Bayes,0.4521,0.646,0.4521,0.8198,0.4904,0.1209,0.214,0.275,html_
+qda,Quadratic Discriminant Analysis,0.3827,0.6501,0.3827,0.8293,0.4004,0.0903,0.1927,0.696,html_

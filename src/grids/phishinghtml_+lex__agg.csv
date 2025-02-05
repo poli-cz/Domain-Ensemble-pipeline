@@ -1,0 +1,16 @@
+,Model,Accuracy,AUC,Recall,Prec.,F1,Kappa,MCC,TT (Sec),Subset
+xgboost,Extreme Gradient Boosting,0.9881,0.9984,0.9881,0.988,0.988,0.9567,0.9569,0.861,html_+lex__agg
+lightgbm,Light Gradient Boosting Machine,0.9877,0.9983,0.9877,0.9877,0.9877,0.9555,0.9556,1.185,html_+lex__agg
+rf,Random Forest Classifier,0.9822,0.9957,0.9822,0.9822,0.982,0.9345,0.9353,1.831,html_+lex__agg
+gbc,Gradient Boosting Classifier,0.9806,0.9967,0.9806,0.9805,0.9805,0.9296,0.9298,33.326,html_+lex__agg
+knn,K Neighbors Classifier,0.9804,0.9842,0.9804,0.9802,0.9802,0.9285,0.9288,1.398,html_+lex__agg
+ada,Ada Boost Classifier,0.9774,0.996,0.9774,0.9774,0.9774,0.9188,0.9188,7.751,html_+lex__agg
+dt,Decision Tree Classifier,0.9754,0.9569,0.9754,0.9754,0.9754,0.9118,0.9118,0.94,html_+lex__agg
+et,Extra Trees Classifier,0.9752,0.9918,0.9752,0.9754,0.9746,0.9066,0.9092,2.554,html_+lex__agg
+lda,Linear Discriminant Analysis,0.9589,0.9876,0.9589,0.9581,0.958,0.8467,0.8482,1.719,html_+lex__agg
+ridge,Ridge Classifier,0.9523,0.9876,0.9523,0.9521,0.9502,0.8143,0.8213,0.386,html_+lex__agg
+lr,Logistic Regression,0.891,0.943,0.891,0.8897,0.8903,0.6039,0.604,1.45,html_+lex__agg
+nb,Naive Bayes,0.8503,0.9263,0.8503,0.8887,0.8619,0.5583,0.5792,0.332,html_+lex__agg
+svm,SVM - Linear Kernel,0.8326,0.5714,0.8326,0.6932,0.7565,0.0,0.0,7.065,html_+lex__agg
+dummy,Dummy Classifier,0.8326,0.5,0.8326,0.6932,0.7565,0.0,0.0,0.248,html_+lex__agg
+qda,Quadratic Discriminant Analysis,0.5143,0.9328,0.5143,0.8551,0.5581,0.1775,0.2901,1.259,html_+lex__agg
