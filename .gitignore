@@ -1,1 +1,3 @@
 *.parquet
+./src/tmp
+./src/mlruns
