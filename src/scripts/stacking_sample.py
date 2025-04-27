@@ -52,7 +52,10 @@ bagging_accuracy = accuracy_score(y_test, bagging_pred)
 
 # Boosting - AdaBoost
 boosting = AdaBoostClassifier(
-    base_estimator=DecisionTreeClassifier(max_depth=1), n_estimators=50, random_state=42
+    estimator=DecisionTreeClassifier(max_depth=1),
+    n_estimators=50,
+    random_state=42,
+    algorithm="SAMME.R",  # Explicitly specify
 )
 boosting.fit(X_train, y_train)
 boosting_pred = boosting.predict(X_test)
@@ -84,9 +87,9 @@ def plot_decision_boundaries(X, y, model, ax, title):
 
     ax.contourf(xx, yy, Z, alpha=0.8, cmap="coolwarm")
     scatter = ax.scatter(X[:, 0], X[:, 1], c=y, edgecolors="k", cmap="coolwarm", s=30)
-    ax.set_title(title)
-    ax.set_xlabel("Feature 1")
-    ax.set_ylabel("Feature 2")
+    ax.set_title(title, fontsize=16)
+    ax.set_xlabel("Příznak 1", fontsize=14)
+    ax.set_ylabel("Příznak 2", fontsize=14)
     return scatter
 
 
@@ -102,14 +105,15 @@ for i, (name, clf) in enumerate(classifiers.items(), start=1):
     )
 
 plt.tight_layout()
+plt.savefig("before_sloz.png")
 plt.show()
 
 # Plot for combined methods
 plt.figure(figsize=(12, 4))
 
 methods = {
-    "Bagging (Random Forest)": (bagging, bagging_accuracy),
-    "Boosting (AdaBoost)": (boosting, boosting_accuracy),
+    "Bagging": (bagging, bagging_accuracy),
+    "Boosting": (boosting, boosting_accuracy),
     "Stacking": (stacking, stacking_accuracy),
 }
 
@@ -118,6 +122,7 @@ for i, (name, (clf, acc)) in enumerate(methods.items(), start=1):
     plot_decision_boundaries(X_test, y_test, clf, ax, f"{name} (Acc: {acc:.3f})")
 
 plt.tight_layout()
+plt.savefig("after_sloz.png")
 plt.show()
 
 # Print the accuracy of each model

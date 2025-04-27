@@ -1,16 +1,16 @@
 ,Model,Accuracy,AUC,Recall,Prec.,F1,Kappa,MCC,TT (Sec),Subset
-rf,Random Forest Classifier,0.8386,0.8048,0.8386,0.8121,0.8031,0.2435,0.2929,0.937,geo_
-et,Extra Trees Classifier,0.8384,0.8019,0.8384,0.8117,0.8029,0.2429,0.2919,0.709,geo_
-xgboost,Extreme Gradient Boosting,0.8407,0.8139,0.8407,0.8172,0.8029,0.2404,0.2982,0.394,geo_
-lightgbm,Light Gradient Boosting Machine,0.8411,0.8154,0.8411,0.8185,0.8024,0.2379,0.2984,0.742,geo_
-dt,Decision Tree Classifier,0.8363,0.7996,0.8363,0.8075,0.8013,0.238,0.283,0.418,geo_
-gbc,Gradient Boosting Classifier,0.8377,0.8021,0.8377,0.8177,0.7893,0.1808,0.2591,6.639,geo_
-knn,K Neighbors Classifier,0.7826,0.7456,0.7826,0.7892,0.783,0.2604,0.2662,0.743,geo_
-ada,Ada Boost Classifier,0.8256,0.7866,0.8256,0.7903,0.7533,0.035,0.0892,1.868,geo_
-ridge,Ridge Classifier,0.8239,0.6887,0.8239,0.6789,0.7444,-0.0001,-0.0008,0.221,geo_
-lda,Linear Discriminant Analysis,0.8239,0.6887,0.8239,0.6789,0.7444,-0.0001,-0.0014,0.296,geo_
-dummy,Dummy Classifier,0.8239,0.5,0.8239,0.6789,0.7444,0.0,0.0,0.16,geo_
-lr,Logistic Regression,0.8236,0.6884,0.8236,0.6788,0.7442,-0.0007,-0.0078,2.977,geo_
-svm,SVM - Linear Kernel,0.7783,0.5967,0.7783,0.7198,0.7391,0.0324,0.0335,0.38,geo_
-qda,Quadratic Discriminant Analysis,0.4177,0.7233,0.4177,0.8364,0.4451,0.1128,0.2218,0.237,geo_
-nb,Naive Bayes,0.3445,0.6299,0.3445,0.7732,0.359,0.045,0.0991,0.175,geo_
+rf,Random Forest Classifier,0.8439,0.8181,0.8439,0.8185,0.8096,0.2522,0.3019,0.494,geo_
+xgboost,Extreme Gradient Boosting,0.8458,0.8266,0.8458,0.8236,0.8091,0.2476,0.3065,0.29,geo_
+et,Extra Trees Classifier,0.8436,0.8159,0.8436,0.818,0.809,0.2497,0.2996,0.395,geo_
+dt,Decision Tree Classifier,0.842,0.8137,0.842,0.8148,0.8079,0.2462,0.2929,0.266,geo_
+lightgbm,Light Gradient Boosting Machine,0.8458,0.8281,0.8458,0.8242,0.8077,0.2408,0.3031,0.65,geo_
+gbc,Gradient Boosting Classifier,0.8438,0.8135,0.8438,0.8236,0.8004,0.2079,0.2806,4.082,geo_
+knn,K Neighbors Classifier,0.8409,0.7643,0.8409,0.8169,0.7966,0.1929,0.2615,0.353,geo_
+ada,Ada Boost Classifier,0.833,0.7953,0.833,0.8039,0.7707,0.0824,0.1579,1.152,geo_
+ridge,Ridge Classifier,0.8283,0.6889,0.8283,0.6862,0.7506,-0.0001,-0.001,0.152,geo_
+lda,Linear Discriminant Analysis,0.8283,0.689,0.8283,0.6862,0.7506,-0.0001,-0.001,0.2,geo_
+dummy,Dummy Classifier,0.8284,0.5,0.8284,0.6862,0.7506,0.0,0.0,0.096,geo_
+lr,Logistic Regression,0.8278,0.7014,0.8278,0.6861,0.7503,-0.0013,-0.0111,1.99,geo_
+svm,SVM - Linear Kernel,0.7767,0.5732,0.7767,0.7127,0.7364,0.0094,0.0024,0.223,geo_
+qda,Quadratic Discriminant Analysis,0.4146,0.7299,0.4146,0.848,0.4426,0.1148,0.2312,0.167,geo_
+nb,Naive Bayes,0.3421,0.6363,0.3421,0.7805,0.3584,0.0455,0.1018,0.115,geo_

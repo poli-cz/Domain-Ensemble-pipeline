@@ -1,16 +1,16 @@
 ,Model,Accuracy,AUC,Recall,Prec.,F1,Kappa,MCC,TT (Sec),Subset
-xgboost,Extreme Gradient Boosting,0.8606,0.8637,0.8606,0.8456,0.8437,0.4169,0.4416,0.329,ip_
-lightgbm,Light Gradient Boosting Machine,0.8601,0.864,0.8601,0.8449,0.843,0.4145,0.4393,0.657,ip_
-knn,K Neighbors Classifier,0.8472,0.7978,0.8472,0.8349,0.8369,0.4093,0.4199,0.434,ip_
-gbc,Gradient Boosting Classifier,0.8502,0.8409,0.8502,0.8321,0.8219,0.3207,0.3674,3.374,ip_
-rf,Random Forest Classifier,0.8251,0.7973,0.8251,0.8112,0.8167,0.3426,0.346,0.781,ip_
-et,Extra Trees Classifier,0.8247,0.7346,0.8247,0.8093,0.8152,0.3341,0.3384,0.849,ip_
-dt,Decision Tree Classifier,0.8214,0.7013,0.8214,0.8049,0.8112,0.3186,0.323,0.296,ip_
-ada,Ada Boost Classifier,0.8332,0.8193,0.8332,0.8124,0.7771,0.1309,0.2138,1.128,ip_
-svm,SVM - Linear Kernel,0.7969,0.6522,0.7969,0.7512,0.7492,0.074,0.0925,0.596,ip_
-lda,Linear Discriminant Analysis,0.824,0.7383,0.824,0.7935,0.7451,0.0025,0.0255,0.231,ip_
-lr,Logistic Regression,0.8235,0.7484,0.8235,0.738,0.745,0.0022,0.0145,0.806,ip_
-ridge,Ridge Classifier,0.824,0.7383,0.824,0.767,0.7446,0.0007,0.0135,0.202,ip_
-dummy,Dummy Classifier,0.8239,0.5,0.8239,0.6789,0.7444,0.0,0.0,0.152,ip_
-qda,Quadratic Discriminant Analysis,0.5494,0.7345,0.5494,0.8345,0.5955,0.1933,0.2882,0.213,ip_
-nb,Naive Bayes,0.5078,0.6664,0.5078,0.8205,0.5535,0.1534,0.2418,0.162,ip_
+xgboost,Extreme Gradient Boosting,0.8647,0.8757,0.8647,0.8501,0.8488,0.4252,0.4483,0.255,ip_
+lightgbm,Light Gradient Boosting Machine,0.8636,0.8761,0.8636,0.8489,0.8457,0.4097,0.438,0.54,ip_
+knn,K Neighbors Classifier,0.8486,0.8166,0.8486,0.8374,0.8395,0.4099,0.4188,0.24,ip_
+rf,Random Forest Classifier,0.8367,0.8196,0.8367,0.8233,0.8283,0.3702,0.3743,0.444,ip_
+gbc,Gradient Boosting Classifier,0.8556,0.8549,0.8556,0.8387,0.828,0.3292,0.3772,2.015,ip_
+et,Extra Trees Classifier,0.8362,0.758,0.8362,0.822,0.8273,0.3649,0.3695,0.516,ip_
+dt,Decision Tree Classifier,0.8316,0.713,0.8316,0.8162,0.8219,0.3439,0.3487,0.176,ip_
+ada,Ada Boost Classifier,0.8344,0.8308,0.8344,0.8026,0.7826,0.1341,0.2009,0.661,ip_
+svm,SVM - Linear Kernel,0.8161,0.6753,0.8161,0.7817,0.7745,0.1334,0.1739,0.366,ip_
+lda,Linear Discriminant Analysis,0.8285,0.7467,0.8285,0.7862,0.7515,0.0033,0.027,0.169,ip_
+lr,Logistic Regression,0.828,0.7549,0.828,0.741,0.7513,0.0026,0.0151,0.494,ip_
+ridge,Ridge Classifier,0.8284,0.7466,0.8284,0.7034,0.7507,0.0002,0.0028,0.141,ip_
+dummy,Dummy Classifier,0.8284,0.5,0.8284,0.6862,0.7506,0.0,0.0,0.094,ip_
+qda,Quadratic Discriminant Analysis,0.5397,0.739,0.5397,0.8467,0.5864,0.1925,0.2978,0.142,ip_
+nb,Naive Bayes,0.5092,0.6737,0.5092,0.8299,0.5563,0.1576,0.2517,0.098,ip_
