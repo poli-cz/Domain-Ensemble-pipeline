@@ -1,3 +1,5 @@
 *.parquet
+*.pkl
+*.pickle
 ./src/tmp
 ./src/mlruns
