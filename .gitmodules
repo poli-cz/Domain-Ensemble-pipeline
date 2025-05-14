@@ -1,4 +1,0 @@
-[submodule "src/dr-playground"]
-	path = src/dr-playground
-	url = https://github.com/OviOvocny/dr-playground.git
-	branch = poli-dev

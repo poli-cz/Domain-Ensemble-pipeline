@@ -1,3 +1,5 @@
+*.keras
+*.joblib
 *.parquet
 *.pkl
 *.pickle
