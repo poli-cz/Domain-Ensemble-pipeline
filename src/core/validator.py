@@ -134,9 +134,9 @@ class ModelValidator:
         self.label = label
         self.prefix = prefix
         self.version = version
-        self.matrix_folder = "confusion"
+        self.matrix_folder = "results"
         self.tex_path = (
-            "./tex_sources/evaluation_metrics.tex"  # ← force the folder and path!
+            "./results/evaluation_metrics.tex"  # ← force the folder and path!
         )
         self.verification = True if verification else False
         self.stage = stage
