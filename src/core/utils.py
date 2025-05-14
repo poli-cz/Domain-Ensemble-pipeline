@@ -85,6 +85,6 @@ def safe_predict(model, X, arch_name=None, label=None, stage=None):
             y_pred = np.argmax(y_pred, axis=1)
         else:
             # Single probability output -> threshold at 0.5
-            y_pred = (y_pred >= 0.5).astype(int)
+            y_pred = (y_pred >= 0.5).astype(float)
 
     return y_pred

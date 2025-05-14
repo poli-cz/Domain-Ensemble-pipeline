@@ -106,20 +106,40 @@ class DomainClassifier:
 
     def classify(self, feature_vector: np.ndarray):
         """Returns binary predictions: meta + FPD corrected"""
+
+        feature_vector = self.chop_feature_vector(feature_vector)
+
         all_preds = []
         for arch, model in self.base_models.items():
             preds = self._predict_arch(model, feature_vector, arch)
             all_preds.append(preds)
 
         meta_input = np.vstack(all_preds).T
-        meta_preds = self.meta_model.predict(meta_input)
 
-        corrected_preds = self.fpd_model.correct_predictions(meta_preds, feature_vector)
+        # add 10 features from feture vector to meta input
+        meta_input_final = np.hstack((meta_input, feature_vector[:10].reshape(1, -1)))
+
+        with suppress_stdout():
+            meta_proba = float(self.meta_model.predict_proba(meta_input_final)[0])
+
+        if meta_proba > 0.5:
+            with suppress_stdout():
+                fpd_proba = float(self.fpd_model.predict_fp_proba(feature_vector)[0])
+        else:
+            fpd_proba = 0.0
+
+        final_proba = meta_proba
+        # if result is positive and fpd is over 0,5 than it if false positive
+        if meta_proba > 0.5 and fpd_proba > 0.5:
+            # we have false positive
+            final_proba = 0.0
 
         return {
+            "partial_preds": [float(p) for p in all_preds],
             "stage": self.stage,
-            "meta_pred": meta_preds.tolist(),
-            "corrected_pred": corrected_preds.tolist(),
+            "meta_proba": round(meta_proba, 4),
+            "fpd_proba": round(fpd_proba, 4),
+            "final_proba": round(final_proba, 4),
         }
 
     def classify_proba(self, feature_vector: np.ndarray):
