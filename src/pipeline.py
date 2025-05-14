@@ -71,14 +71,16 @@ class DomainClassifier:
 
         if n_features < 62:
             raise ValueError(
-                "Feature vector has too few columns for jakoukoli fázi (minimum is 62)."
+                "Feature vector has too few columns for any phase (minimum is 62)."
             )
         elif n_features < 128:
             self.stage = 1
         elif n_features < 176:
             self.stage = 2
-        else:
+        elif n_features == 176:
             self.stage = 3
+        else:
+            print()
 
         print("Stage determined:", self.stage)
         return self.stage
