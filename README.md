@@ -138,7 +138,13 @@ poetry run jupyter notebook
 
 ## 🚀 Getting Started
 
-To see the pipeline in action, open the following notebook:
+To see the pipeline in action, run following python file
+
+```
+src/classification_example.py
+```
+
+or use the Jupyter notebook:
 
 ```
 src/ensemble_pipeline_example.ipynb
