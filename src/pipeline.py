@@ -80,9 +80,9 @@ class DomainClassifier:
         elif n_features == 176:
             self.stage = 3
         else:
-            print()
-
-        print("Stage determined:", self.stage)
+            raise ValueError(
+                "Feature vector has too many columns for any phase (maximum is 176)."
+            )
         return self.stage
 
     def _load_meta_model(self):

@@ -204,7 +204,7 @@ class Loader:
         # Save the scalei
 
         joblib.dump(
-            scaler, f"scalers/{self.malicious_label}_{model}_{stage}_scaler.joblib"
+            scaler, f"../scalers/{self.malicious_label}_{model}_{stage}_scaler.joblib"
         )
 
         return features

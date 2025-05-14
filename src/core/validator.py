@@ -21,6 +21,39 @@ from sklearn.metrics import (
 )
 
 
+def load_random_sample(stage, folder="./data/", n_samples=1000):
+    source = "validation"
+
+    def load_label_data(label):
+        if stage not in [1, 2, 3]:
+            raise ValueError("Invalid stage. Choose 1, 2, or 3.")
+        filename = f"{folder}{source}_stage_{stage}_{label}.pkl"
+        with open(filename, "rb") as f:
+            dump = pickle.load(f)
+            return dump["X_test"], dump["Y_test"]
+
+    # Load both phishing and malware
+    X_phish, y_phish = load_label_data("phishing")
+    X_malw, y_malw = load_label_data("malware")
+
+    # Concatenate
+    X_all = np.concatenate([X_phish, X_malw], axis=0)
+    y_all = np.concatenate([y_phish, y_malw], axis=0)
+
+    # Shuffle
+    indices = np.arange(len(X_all))
+    np.random.shuffle(indices)
+    X_all = X_all[indices]
+    y_all = y_all[indices]
+
+    # Sample
+    if len(X_all) > n_samples:
+        X_all = X_all[:n_samples]
+        y_all = y_all[:n_samples]
+
+    return X_all, y_all
+
+
 def load_saved_split(stage, label, folder="./data/", verification=False):
 
     source = "verification" if verification else "validation"

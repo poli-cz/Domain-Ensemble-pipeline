@@ -18,9 +18,6 @@ def safe_scale(X, arch_name=None, label=None, stage=None):
         )
 
     elif arch_name == "svm":
-        print(
-            f"🔄 Detected SVM, using: scalers/{label}_{arch_name}_{stage}_scaler.joblib scaler"
-        )
         X = joblib.load(f"scalers/{label}_{arch_name}_{stage}_scaler.joblib").transform(
             X
         )
@@ -33,10 +30,6 @@ def safe_scale(X, arch_name=None, label=None, stage=None):
         # Apply scaler
         scaler_path = f"scalers/{label}_{arch_name}_{stage}_scaler.joblib"
         X = joblib.load(scaler_path).transform(X)
-
-        # print shape of the data
-        print(f"X_test shape: {X.shape}")
-        print("Scaled and selected attention_tls input features")
 
     elif arch_name == "cnn":
         # Načti scaler
@@ -60,9 +53,6 @@ def safe_scale(X, arch_name=None, label=None, stage=None):
 
         # Reshape na (N, side, side, 1)
         X = X.reshape(-1, side_size, side_size, 1)
-        print(
-            f"[CNN] X_test reshaped to {X.shape} (side {side_size}, padded by {padding})"
-        )
 
     return X
 
@@ -81,10 +71,7 @@ def safe_predict(model, X, arch_name=None, label=None, stage=None):
     # Handle probability outputs (e.g., from neural networks)
     if np.issubdtype(y_pred.dtype, np.floating):
         if y_pred.ndim == 2 and y_pred.shape[1] > 1:
-            # Multiclass or binary with probabilities -> argmax
-            y_pred = np.argmax(y_pred, axis=1)
-        else:
-            # Single probability output -> threshold at 0.5
-            y_pred = (y_pred >= 0.5).astype(float)
+            # Return prediction for positive class
+            y_pred = y_pred[:, 1]
 
     return y_pred
