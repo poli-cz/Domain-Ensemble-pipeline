@@ -1,0 +1,42 @@
+\subsection{Charakteristiky Maligních Domén}
+Maligní domény se vyznačují specifickými rysy, které je odlišují od legitimních domén. Tyto rysy lze klasifikovat do následujících kategorií:
+
+\begin{itemize}
+\item \textbf{DNS Záznamy}: Podezřelé domény často mají neobvyklé nebo nestandardní DNS záznamy, jako jsou A, AAAA, MX, NS, TXT, SOA, CNAME. Například časté změny v A záznamech mohou indikovat Fast Flux sítě, které jsou často využívány botnety \cite{silveira2021detection}.
+
+
+\item \textbf{RDAP Dotazy}: Informace získané z RDAP (Registration Data Access Protocol) dotazů, jako jsou počty IP adres, délky prefixů, nebo entropie jmén a emailů administrátorů, mohou odhalit podezřelé schéma či nedostatečně identifikovatelné vlastníky domén \cite{zhu2020detecting}.
+
+\item \textbf{Technická a Administrativní Metadata}: Metadata, jako jsou data registrace, expirace, změn v obsahu domény, a frekvence dotazů na doménu, mohou být důležitými indikátory. Krátká životnost domény nebo neobvyklé vzorce v administrativních kontaktech mohou signalizovat podvodnou aktivitu \cite{max2020madmax}.
+
+
+\end{itemize}
+
+
+
+\subsection{Projevy Charakteristik v Reálných Datech}
+
+Charakteristiky maligních domén se mohou projevovat různými způsoby v závislosti na zdroji dat:
+
+\begin{itemize}
+\item \textbf{DNS Záznamy}: V reálných datech lze pozorovat anomálie v DNS záznamech, jako jsou časté změny v A nebo NS záznamech, což může indikovat techniku Fast Flux nebo použití Domain Generation Algorithms (DGA) \cite{silveira2021detection}. Také neobvyklé TTL hodnoty mohou být známkou podezřelé aktivity.
+
+\item \textbf{RDAP Dotazy}: Skrze RDAP dotazy je možné identifikovat nekonzistence v registračních informacích domén, jako jsou anonymní nebo nepravdivé údaje, což může naznačovat pokus o skrytí skutečných záměrů domény \cite{zhu2020detecting}.
+
+\item \textbf{Administrativní Metadata}: Historie a změny spojené s doménou, jako jsou data registrace a expirace, mohou být sledovány a analyzovány k odhalení krátkodobě existujících domén, které jsou často využívány pro škodlivé účely \cite{max2020madmax}.
+
+\end{itemize}
+
+
+
+\subsection{Zdroje Dat pro Pozorování Charakteristik}
+Zdroje dat, které mohou být využity pro analýzu a detekci maligních domén, zahrnují:
+
+\begin{itemize}
+\item \textbf{Pasivní DNS Databáze}: Databáze, které shromažďují historické a aktuální DNS dotazy, jsou klíčovým zdrojem pro analýzu DNS záznamů \cite{silveira2021detection}.
+
+\item \textbf{Registrační Databáze}: RDAP a WHOIS databáze poskytují informace o registračních údajích domén, které mohou být analyzovány na podezřelé vzorce \cite{zhu2020detecting}.
+
+\item \textbf{Bezpečnostní Feedy a Blacklisty}: Databáze obsahující známé škodlivé domény a jejich charakteristiky, jako jsou blacklisty a bezpečnostní feedy, poskytují cenné informace o známých hrozbách a mohou být využity pro trénování detekčních modelů \cite{max2020madmax}.
+
+\end{itemize}

@@ -1,0 +1,560 @@
+\chapter{Obsah přiloženého paměťového média}
+Přiložený disk obsahuje:
+\begin{itemize}
+    \item tento dokument ve formátu PDF,
+    \item zdrojové soubory tohoto dokumentu,
+    \item zdrojové kódy vyvinutého klasifikačního systému
+    \item klasifikátory které vznikly v~rámci této práce
+    \item trénovací, validační a verifikační datové sady
+    \item návod k~použití přiloženého klasifikačního systému
+\end{itemize}
+
+
+
+
+
+\chapter{Manuál}
+
+Veškerý zdrojový kód, trénovací skripty, výsledky experimentů i příklady použití klasifikační pipeline jsou volně dostupné v~repozitáři na platformě Github:
+
+\begin{center}
+\url{https://github.com/poli-cz/Domain-Ensemble-pipeline}
+\end{center}
+
+\noindent Tento repozitář slouží jako praktický doplněk k~této diplomové práci a umožňuje plnou replikaci a rozšíření prezentovaného řešení.
+
+\section*{Přiložený software}
+
+Repozitář obsahuje kompletní implementaci vícestupňové klasifikační pipeline určené pro detekci maligních domén. Kromě samotného systému zahrnuje také sadu předtrénovaných modelů, podpůrné utility pro načítání dat, vizualizaci výstupů a moduly pro výpočet interpretací pomocí SHAP analýzy.
+
+\subsection*{Trénování klasifikátorů}
+
+Trénovací skripty jsou připraveny ve formě Jupyter notebooků a jsou umístěny ve složce:
+
+\begin{verbatim}
+src/training/
+\end{verbatim}
+
+Pro každý klasifikátor je připraven samostatný notebook:
+
+\begin{itemize}
+\item \texttt{feedforward\_train.ipynb} – trénink plně propojené neuronové sítě (FFNN)
+\item \texttt{cnn\_train.ipynb} – trénink konvoluční neuronové sítě (CNN)
+\item \texttt{svm\_train.ipynb} – trénink klasifikátoru svm
+\item \texttt{xgb\_lgbm\_train.ipynb} – trénink stromových modelů (XGBoost a LightGBM)
+\item \texttt{meta\_model\_train.ipynb} – trénink rozhodovacího meta-modelu a modulu pro detekci falešně pozitivních vzorků (FPD)
+\end{itemize}
+
+\noindent Trénink probíhá na vstupních datasetech ve formátu .parquet, které je nutné stáhnout samostatně (například z~repozitáře \texttt{domainradar-clf}) a umístit do složky:
+
+\begin{verbatim}
+src/parkets/
+\end{verbatim}
+
+\subsection*{Běh klasifikačního systému}
+
+Pro spuštění klasifikační pipeline na nových doménách slouží notebook:
+
+\begin{verbatim}
+src/ensemble_pipeline_example.ipynb
+\end{verbatim}
+
+V~tomto notebooku je demonstrováno:
+
+\begin{itemize}
+\item inicializace pipeline včetně načtení předtrénovaných modelů
+\item klasifikace vstupních vzorků domén
+\item volitelná interpretace výstupu pomocí SHAP hodnot
+\end{itemize}
+
+Pipeline automaticky detekuje dostupnost jednotlivých příznakových kategorií (lexikální, DNS, RDAP, TLS apod.) a adaptivně zvolí odpovídající klasifikační model.
+
+Konkrétní verze použitých modelů lze upravit ve skriptu:
+
+\begin{verbatim}
+src/pipeline.py
+\end{verbatim}
+
+\section*{Adresáře}
+\label{sec:adresare}
+
+Tato sekce přílohy stručně popisuje strukturu repozitáře, který obsahuje implementaci klasifikační pipeline pro detekci škodlivých domén. Systém tvoří samostatný, plně funkční modul pro trénink, inferenci a vyhodnocování modelů. Repozitář je rozdělen do adresářů podle funkce jednotlivých komponent:
+
+\begin{itemize}
+    \item \textbf{/src} – Hlavní adresář s~implementací klasifikační pipeline. Obsahuje datové transformace, načítání modelů, tréninkové notebooky, SHAP analýzu, i demonstrační příklad použití.
+    
+    \item \textbf{/src/core} – Základní komponenty pipeline: načítání a segmentace dat, modely metaklasifikace, detekce falešně pozitivních vzorků, a pomocné utility.
+    
+    \item \textbf{/src/models} – Vytrénované modely všech architektur (Keras, LightGBM, SVM, XGBoost) a jejich potřebné scalery. Obsahuje i samostatné složky pro metamodel a FPD modul.
+    
+    \item \textbf{/src/scalers} – Předtrénované modely pro normalizace a škálování uložené pomocí knihovny \texttt{joblib}, potřebné při inferenci dat.
+    
+    \item \textbf{/src/data} – Serializované validační a verifikační datasety (ve formátu \texttt{.pkl}) pro jednotlivé fáze klasifikace.
+    
+    \item \textbf{/src/parkets} – Vstupní datasety ve formátu \texttt{parquet}. Obsahuje anonymizovaná i neanonymizovaná data, HTML varianty, a testovací podmnožiny.
+    
+    \item \textbf{/src/results} – Výstupní grafy a výsledky vyhodnocení, např. konfuzní matice modelů.
+    
+    \item \textbf{/src/tmp} – Dočasné a experimentální výstupy vzniklé během ladění pipeline, např. serializované výsledky, podmnožiny datasetů, nebo mezivýstupy modelů.
+    
+    \item \textbf{/src/training} – Trénovací Jupyter notebooky pro jednotlivé modely: FFNN, CNN, SVM, LightGBM/XGBoost, attention modely a metamodel.
+    
+    \item \textbf{/src/tex\_sources} – Pomocné \LaTeX{} soubory a tabulky s~metrikami, použité při psaní práce.
+    
+    \item \textbf{/src/ensemble\_pipeline\_example.ipynb} – Příkladový notebook demonstrující kompletní klasifikaci vstupních domén pomocí finální pipeline.
+    
+    \item \textbf{/docs} – Dokumentace a podpůrné materiály k~diplomové práci, zejména vizualizace, diagramy a SHAP grafy.
+    
+    \item \textbf{/docs/figures} – Všechny výstupní obrázky, včetně agregovaných výsledků, SHAP analýz, architektur a porovnání.
+    
+    \item \textbf{/docs/figures/confusion\_matrices} – Konfuzní matice všech modelů ve všech fázích tréninku a verifikace.
+    
+    \item \textbf{/docs/tex\_sources} – Soubory použitých LaTeX tabulek, sloupcových dat a automaticky generovaných výsledků metrik.
+    
+    \item \textbf{/experiments} – Experimenty s~mřížkami příznaků, porovnání modelů, SHAP analýzou a ladění pipeline.
+    
+    \item \textbf{/experiments/grids} – CSV soubory obsahující výsledky mřížkových vyhodnocení příznakových subsetů pro phishing i malware.
+    
+    \item \textbf{/experiments/shap} – SHAP analýzy, skripty a záložní výstupy přínosů jednotlivých příznaků pro vybrané modely.
+    
+    \item \textbf{/tests} – Jednotkové testy pro ověření základní funkčnosti vybraných komponent pipeline.
+    
+    \item \textbf{README.md} – Úvodní dokumentace repozitáře (v~anglickém jazyce), s~návodem na spuštění, trénink a inferenci.
+    
+    \item \textbf{poetry.lock, pyproject.toml} – Konfigurační soubory pro správu Python prostředí pomocí nástroje \texttt{Poetry}.
+\end{itemize}
+\chapter{Publikační činnost}
+\label{appendix:publications}
+
+S~touto diplomovou prací úzce souvisí několik vědeckých publikací, na jejichž jsem spoluautorem. Tyto publikace vznikly v~průběhu řešení práce a pokrývají různé aspekty detekce maligních domén.
+
+\begin{itemize}
+    \item \textbf{Unmasking the Phishermen: Phishing Domain Detection with Machine Learning and Multi-Source Intelligence}  
+    (publikováno na konferenci \textit{IEEE/IFIP Network Operations and Management Symposium (NOMS 2024)})  
+    Článek se zabývá detekcí phishingových domén pomocí kombinace vícerozdrojových dat (DNS, RDAP, TLS, IP) a využívá ensemble modely pro zvýšení přesnosti klasifikace. Zvláštní důraz je kladen na reálnou aplikovatelnost modelů a nízkou míru falešně pozitivních detekcí \cite{noms}.
+
+    \item \textbf{Spotting the Hook: Leveraging Domain Data for Advanced Phishing Detection}  
+    (publikováno na konferenci \textit{IEEE CNSM 2024})  
+    Publikace představuje 143položkový příznakový vektor pro phishingovou klasifikaci a hodnotí jeho efektivitu napříč sedmi strojově učenými modely. Výsledky ukazují velmi vysokou přesnost (0{,}983) a nízkou chybovost díky využití multi-modalních vstupních dat \cite{CNSM}.
+
+    \item \textbf{A~Multi-Dimensional DNS Domain Intelligence Dataset for Cybersecurity Research}  
+    (v~recenzním řízení, žurnál \textit{Data in Brief})  
+    Tento článek popisuje rozsáhlou datovou sadu více než 1 milionu anotovaných domén (benigních, phishingových a malware), včetně metodologie sběru, transformace a kategorizace dat ze čtyř hlavních zdrojů: DNS, RDAP, TLS a GeoIP.
+
+    \item \textbf{Digital Wolves in Sheep’s Clothing: Detecting Malicious Domains using a Multi-Stage Classifier Pipeline}  
+    (v~přípravě, žurnál \textit{IEEE Access})  
+    Článek se věnuje návrhu a experimentálnímu vyhodnocení vícestupňové klasifikační pipeline s~paralelními modely, rozhodovacím metaklasifikátorem a modulem pro detekci falešných pozitiv. Přímým základem článku je implementace uvedená v~této práci.
+
+    \item \textbf{DomainRadar: A~Data-Driven Approach to Malicious Domain Identification}  
+    (v~přípravě, žurnál \textit{IEEE Transactions on Information Forensics and Security (TIFS)})  
+    Tento článek popisuje vývoj a architekturu systému \textit{DomainRadar}, který integruje výsledky této práce do automatizovaného nástroje pro detekci maligních domén v~síťovém provozu. Zaměřuje se na praktické nasazení v~prostředí bezpečnostních analytiků a SOC týmů.
+\end{itemize}
+
+\chapter{Přehled použitých příznaků}
+
+\label{app:feature_vector}
+
+V~této příloze je uvedena kompletní tabulka použitých příznaků (feature vektor), které byly analyzovány a využívány v~klasifikátorech v~rámci této práce. Celkem se jedná o~243 příznaků. 
+
+\input{features-en.tex}
+
+
+
+
+
+\chapter{Specializovaná klasifikace na základě TLS příznaků}
+\label{appendix:tls-classification}
+
+Tato příloha rozšiřuje hlavní část práce o~podrobnosti týkající se experimentální klasifikace domén výhradně na základě TLS příznaků. Přístup je motivován zjištěním, že TLS příznaky vykazují v~původním modelu nízký agregovaný přínos, a přesto mohou představovat cenný doplňkový zdroj informací, jak bylo prokázáno například ve studii Torroleda et al.~\cite{torroledo2018hunting}.
+
+\section*{Motivace}
+Na základě analýzy Shapleyho hodnot (viz Obr.~\ref{fig:aggregated-shap}) byla identifikována skupina TLS příznaků jako oblast s~nejnižším průměrným přínosem (0{,}046). Tento výsledek naznačuje, že původní sada TLS atributů byla podhodnocena, a přitom podle literatury skýtá významný detekční potenciál. Rozhodli jsme se proto navrhnout rozšířený extrakční a klasifikační systém zaměřený právě na tuto doménu.
+
+\section*{Význam původních TLS příznaků}
+
+Tabulka~\ref{tab:tls_shap_values} shrnuje původní TLS příznaky a jejich přínos dle metody SHAP.
+
+\begin{table}[H]
+\centering
+
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Příznak} & \textbf{SHAP hodnota} \\
+\hline
+\texttt{tls\_root\_cert\_validity\_remaining} & 1{,}5850 \\
+\texttt{tls\_leaf\_cert\_validity\_len}       & 0{,}3612 \\
+\texttt{tls\_root\_cert\_validity\_len}       & 0{,}2098 \\
+\texttt{tls\_leaf\_cert\_validity\_remaining} & 0{,}1922 \\
+\texttt{tls\_total\_extension\_count}         & 0{,}1594 \\
+\texttt{tls\_joint\_isoitu\_policy\_crt\_count} & 0{,}1279 \\
+\texttt{tls\_unique\_SLD\_count}              & 0{,}1189 \\
+\texttt{tls\_version\_id}                     & 0{,}1129 \\
+\texttt{tls\_cipher\_id}                      & 0{,}0774 \\
+\texttt{tls\_CA\_certs\_in\_chain\_ratio}      & 0{,}0691 \\
+\hline
+\end{tabular}
+\caption{Význam vybraných TLS příznaků podle analýzy metodou SHAP.}
+\label{tab:tls_shap_values}
+\end{table}
+
+\section*{Hloubková analýza a rozšíření TLS příznaků}
+
+Na základě výsledků analýzy Shapleyho hodnot bylo zřejmé, že původní TLS příznaky vykazují v~rámci celkové klasifikace relativně nízký přínos. Přestože literatura naznačuje jejich potenciál při detekci anomálií a škodlivých entit v~síťovém provozu~\cite{torroledo2018hunting}, jejich základní reprezentace ve výchozí sadě atributů nebyla zjevně dostačující.
+
+Z~tohoto důvodu byla provedena hloubková analýza obsahu TLS certifikátů a navrženo rozšíření extrakční logiky. Východiskem byl nástroj \texttt{DomainRadar}~\cite{domainradar}, vyvíjený v~rámci projektu FETA, jehož podrobnější popis se nachází v~sekci \ref{domainradar}.
+
+Cílem bylo vytvořit obohacenou sadu TLS atributů, která lépe vystihuje strukturu a vlastnosti certifikátového řetězce a umožní přesnější klasifikaci domén v~kontextu šifrované komunikace.
+
+\subsection*{Rozšířené charakteristiky TLS certifikátů}
+V~rámci nové extrakční logiky byly zpracovány zejména následující prvky:
+
+\begin{itemize}
+    \item \textbf{Výpočet entropie:} Shannonova entropie textových polí organizace a vydavatele certifikátu, indikující nestandardní nebo syntetické hodnoty.
+    \item \textbf{Hloubka řetězce:} Počet certifikátů v~řetězci jako ukazatel důvěryhodnosti a složitosti infrastruktury.
+    \item \textbf{Bezpečnostní politiky:} Přítomnost politik a rozšíření dle standardů X.509 a ISO.
+    \item \textbf{Kombinované ukazatele:} Poměry a rozdíly mezi délkami platnosti, počet rozšíření a relace mezi jednotlivými vrstvami řetězce.
+\end{itemize}
+
+\clearpage
+
+\subsection*{Ukázkový výpis zpracovaného certifikátu}
+Následující výpis ukazuje reálnou strukturu TLS certifikátu zpracovaného systémem:
+
+\begin{lstlisting}[basicstyle=\ttfamily\small, breaklines=true, numbers=left, frame=single, caption={Struktura TLS certifikátu}]
+{
+    "protocol": "TLSv1.3",
+    "cipher": "TLS_AES_256_GCM_SHA384",
+    "count": 4,
+    "certificates": [
+        {
+            "common_name": "E1",
+            "country": "US",
+            "is_root": false,
+            "organization": "Let's Encrypt",
+            "valid_len": 7775999,
+            "validity_start": "2024-04-27 10:25:58",
+            "validity_end": "2024-07-26 10:25:57",
+            "extension_count": 9,
+            "extensions": [
+                {
+                    "critical": true,
+                    "name": "keyUsage",
+                    "value": "Digital Signature"
+                },
+                {
+                    "critical": false,
+                    "name": "extendedKeyUsage",
+                    "value": "TLS Web Server Authentication, 
+                              TLS Web Client Authentication"
+                }
+            ]
+        }
+    ]
+}
+\end{lstlisting}
+\label{tls_cert_example}
+
+Výpis \ref{tls_cert_example} znázorňuje strukturu TLS certifikátu získaného během aktivního skenování domény. Obsahuje základní vlastnosti, jako jsou použitý šifrovací algoritmus, doba platnosti nebo počet rozšíření. Tyto surové atributy představují vstupní datový základ, ze kterého jsou následně odvozeny pokročilé příznaky – například entropie textových polí, poměry mezi certifikáty nebo metriky anomálií. Díky této struktuře je možné extrahovat reprezentaci popisující chování certifikátu na vyšší úrovni.
+
+
+\subsection*{Zpracování TLS řetězce certifikátů}
+
+Jednotlivé certifikáty v~TLS řetězci jsou iterativně zpracovávány a jsou k~nim doplňovány příznaky zaměřující se na:
+
+\begin{enumerate}
+    \item \textbf{Extrakce základních rysů} – délka platnosti, počet rozšíření, identifikace autority.
+    \item \textbf{Výpočet metrik} – entropie názvů, poměry mezi kořenovým a listovým certifikátem.
+    \item \textbf{Detekce anomálií} – samo-podepsané certifikáty s~více články v~řetězci, řetězce bez validity apod.
+\end{enumerate}
+
+
+\subsection*{Nově vytvořené TLS příznaky}
+
+Na základě výše popsaného zpracování byla navržena rozšířená sada deseti nových TLS příznaků. Jejich přehled a přínos je shrnut v~tabulce~\ref{tab:new_tls_features}.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|p{7.8cm}|}
+\hline
+\textbf{Příznak} & \textbf{Popis} \\
+\hline
+\texttt{tls\_cert\_validity\_ratio} & Poměr mezi platností kořenového a listového certifikátu. \\
+\texttt{tls\_cert\_validity\_diff} & Rozdíl v~délce platnosti mezi certifikáty. \\
+\texttt{tls\_has\_broken\_or\_expired\_chain} & Označuje, zda je certifikační řetězec neplatný. \\
+\texttt{tls\_is\_self\_signed\_and\_has\_chain} & Identifikuje anomálie u~samo-podepsaných certifikátů. \\
+\texttt{tls\_policies\_total\_count} & Celkový počet politik v~řetězci. \\
+\texttt{tls\_auth\_cert\_ratio} & Poměr mezi certifikáty pro server a klienta. \\
+\texttt{tls\_root\_leaf\_hash\_match} & Shoda hashů mezi kořenovým a listovým certifikátem. \\
+\texttt{tls\_chain\_cert\_len\_combined} & Kombinace délky řetězce a platnosti certifikátů. \\
+\texttt{tls\_cipher\_entropy} & Entropie identifikátorů cipherů. \\
+\texttt{tls\_version\_entropy} & Entropie verzí TLS protokolu. \\
+\hline
+\end{tabular}
+\caption{Nově vytvořené TLS příznaky a jejich přínos.}
+\label{tab:new_tls_features}
+\end{table}
+
+Navržené příznaky byly zvoleny s~ohledem na jejich schopnost popsat netriviální vlastnosti TLS certifikátového řetězce, které nejsou přímo zachyceny běžnými statickými atributy. Například poměr a rozdíl délek platnosti kořenového \texttt{validity\_ratio} a listového certifikátu \texttt{validity\_diff} mohou indikovat nestandardní nebo synteticky vytvořené řetězce. Metriky jako \texttt{entropy}, \texttt{hash\_match} nebo \texttt{chain\_length\_combined} zachycují jemné odchylky v~implementaci certifikátů, které se často vyskytují u~phishingových nebo automaticky generovaných domén. 
+
+
+\section*{Architektura neuronové sítě založené na TLS příznacích}
+\label{appendix:tls-network-architecture}
+
+Po návrhu a implementaci rozšířené sady TLS příznaků byl navržen klasifikační model, který tyto atributy zpracovává samostatně, bez využití dalších datových zdrojů (např. DNS nebo WHOIS). Model níže slouží jako experimentální klasifikátor využívající \textbf{pouze 24 TLS atributů}. Místo plného mechanismu \emph{attention} používá jednodimenzionální \textit{feature-wise gating}. Tedy malá sigmoid maska zvýrazňující relevantní rysy a potlačující šum ještě před hlubší projekcí.
+
+\vspace{0.3em}
+\begin{samepage}
+\begin{verbatim}
+class TLSClassifier(nn.Module):
+    def __init__(self, in_dim=24):
+        super().__init__()
+        self.gate = nn.Sequential(    # 1. Sigmoidová maska (feature gate)
+            nn.Linear(in_dim, in_dim),   
+            nn.Sigmoid()                 
+        )
+        self.fc_in = nn.Sequential(   # 2. Vstupní projekce → 512 prvků
+            nn.Linear(in_dim, 512),
+            nn.BatchNorm1d(512),
+            nn.ReLU()
+        )
+        
+        self.fc1 = nn.Sequential(     # 3. Skrytý blok (512 -> 256 neuronů)
+            nn.Linear(512, 256),
+            nn.BatchNorm1d(256),
+            nn.ReLU(),
+            nn.Dropout(0.3)
+        )
+        self.fc2 = nn.Sequential(     # 3. Skrytý blok (256 -> 125 neuronů)
+            nn.Linear(256, 128),
+            nn.BatchNorm1d(128),
+            nn.ReLU(),
+            nn.Dropout(0.3)
+        )
+        
+        self.skip = nn.Linear(in, 128)# 4) Reziduální větev vstupu
+        self.out  = nn.Linear(128, 1) # 5) Pravděpodobnost malignity
+
+\end{verbatim}
+\end{samepage}
+
+\begin{itemize}
+  \item \textbf{Vstup (24 prvků)} – délka platnosti, typ validace, entropie CN aj. (normalizováno na $\langle0,1\rangle$).
+  \item \textbf{Gating} – maska $w\in(0,1)^{24}$ z~vrstvy Dense + sigmoid; vstup se po prvcích násobí $x \odot w$.
+  \item \textbf{Projekční bloky} – Dense 512 $\rightarrow$ 256 $\rightarrow$ 128, vždy s~\texttt{BatchNorm}, \texttt{ReLU}; po dvou blocích \texttt{Dropout 0.3}.
+  \item \textbf{Reziduální větev} – vstup směrován do 128 neuronů a přičten (\texttt{skip connection}) pro lepší tok gradientu.
+  \item \textbf{Výstup} – jeden neuron se \texttt{sigmoid} vrací pravděpodobnost, že doména je maligní.
+\end{itemize}
+
+Plný schématický náhled je na obr.~\ref{fig:tls_classifier_architecture}; textová podoba architektury je uvedena výše v~blokovém výpisu.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{obrazky-figures/tls_attention.png}
+\caption{Architektura specializovaného TLS klasifikátoru s~feature-wise gatingem.}
+\label{fig:tls_classifier_architecture}
+\end{figure}
+
+\section*{Výsledky klasifikace}
+\label{appendix:tls-results}
+
+Model \texttt{attention\_tls} byl testován ve třetí fázi klasifikace samostatně pro phishingové a malware domény. Na validační datové sadě dosahoval velmi vysoké výkonnosti – přesnost, úplnost i F1 skóre se pohybovaly nad 95~\%, jak shrnuje tabulka~\ref{tab:attention_tls_results}.
+
+
+\begin{table}[h!]
+    \centering
+        \begin{tabular}{|l|c|c|}
+            \hline
+            \textbf{Metrika} & \textbf{Phishing} & \textbf{Malware} \\
+            \hline
+            Přesnost klasifikace (Accuracy)& 0{,}9934 ± 1{,}4e-04 & 0{,}9896 ± 7{,}8e-05 \\
+            Přesnost pozitivní třídy (Precision)    & 0{,}9882 ± 8{,}8e-05 & 0{,}9660 ± 7{,}2e-05 \\
+            Úplnost (Recall)        & 0{,}9722 ± 5{,}2e-05 & 0{,}9383 ± 5{,}7e-05 \\
+            F1 skóre                & 0{,}9801 ± 6{,}4e-05 & 0{,}9519 ± 4{,}8e-05 \\
+            ROC AUC                 & 0{,}9849 ± 7{,}9e-05 & 0{,}9671 ± 6{,}1e-05 \\
+            \hline
+        \end{tabular}
+        \caption{Výsledky klasifikace modelu \texttt{tls} pro phishing a malware domény (10 běhů)}
+    \label{tab:attention_tls_results}
+\end{table}
+
+Z~těchto výsledků vyplývá, že samotné TLS příznaky poskytují dostatečně bohatou informační hodnotu pro účinnou detekci škodlivých domén. Model vykazoval velmi vysoké hodnoty přesnosti, F1 skóre i AUC pro obě klasifikační úlohy a jeví se jako vhodný například pro nasazení v~prostředích s~omezeným přístupem k~DNS nebo aplikačním datům. Výsledky byly dále ověřeny na oddělené verifikační datové sadě, viz sekce \ref{verification_fail}.
+
+\section*{Analýza matic záměn}
+
+Kvalitu klasifikace potvrzuje i rozložení záměn zobrazené na obrázcích~\ref{fig:attention_tls_conf_matrix_phishing} a~\ref{fig:attention_tls_conf_matrix_malware}, kde je patrné minimum falešných pozitivních i negativních detekcí.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{obrazky-figures/attention_tls_stage_3_phishing_v1.1_confusion_matrix.png}
+    \caption{Matice záměn pro phishingové domény (fáze~3).}
+    \label{fig:attention_tls_conf_matrix_phishing}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{obrazky-figures/attention_tls_stage_3_malware_v1.1_confusion_matrix.png}
+    \caption{Matice záměn pro malware domény (fáze~3).}
+    \label{fig:attention_tls_conf_matrix_malware}
+\end{figure}
+
+\section*{Výsledky na verifikační datové sadě}
+\label{verification_fail}
+Přestože model \texttt{attention\_tls} dosáhl velmi dobrých výsledků na validační datové sadě (viz Tabulka~\ref{tab:attention_tls_results}), jeho výkon na verifikačním vzorku byl výrazně slabší (viz Tabulka~\ref{tab:tls_attention_combined}) , zejména v~případě detekce malware domén. Zatímco recall zůstal vysoký, přesnost (precision) se u~obou úloh propadla, což naznačuje zvýšený počet falešně pozitivních klasifikací.
+
+Z~důvodu této slabší generalizace nebyl model založený výhradně na TLS příznacích zapojen do výsledné klasifikační pipeline. Přesto však považujeme tento přístup za zajímavý směr dalšího výzkumu – zejména s~ohledem na nízké nároky na vstupní data a možnost jeho nasazení v~prostředích s~omezenými možnostmi hlubší inspekce.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Metrika} & \textbf{Malware} & \textbf{Phishing} \\
+\hline
+Přesnost klasifikace (Accuracy)      & \texttt{0.8750 ± 6.2e-05} & \texttt{0.9278 ± 4.8e-05} \\
+Přesnost pozitivní třídy (Precision) & \texttt{0.5814 ± 1.1e-04} & \texttt{0.7072 ± 9.1e-05} \\
+Úplnost (Recall)                     & \texttt{0.8117 ± 9.0e-05} & \texttt{0.9481 ± 9.3e-05} \\
+F1 skóre                             & \texttt{0.6767 ± 5.8e-05} & \texttt{0.8101 ± 4.1e-05} \\
+ROC AUC                              & \texttt{0.8573 ± 7.2e-05} & \texttt{0.9360 ± 7.0e-05} \\
+\hline
+\end{tabular}
+\caption{Srovnání metrik modelu \texttt{attention\_tls} (Stage 3) pro malware a phishing (10 běhů).}
+\label{tab:tls_attention_combined}
+\end{table}
+
+\section*{Závěr}
+
+Specializovaný model \texttt{attention\_tls} ukázal, že je možné klasifikovat domény pouze na základě TLS metadat, bez nutnosti využití DNS, WHOIS nebo aplikačních příznaků. Při validaci dosáhl velmi dobrých výsledků a potvrdil, že TLS příznaky představují zajímavý, byť v~praxi dosud málo využívaný, zdroj informací pro detekci škodlivých domén.
+
+Při testování na verifikační datové sadě se však ukázalo, že model nedosahuje stejné úrovně generalizace. Zatímco úplnost zůstala vysoká, přesnost poklesla, zejména v~případě malware domén, což vedlo ke zvýšenému výskytu falešně pozitivních klasifikací. Vzhledem k~těmto výsledkům nebyl model \texttt{attention\_tls} zařazen do finální klasifikační pipeline.
+
+Přesto zůstává přístup založený na TLS a jeho samostatná klasifikace relevantní a slibnou oblastí pro další výzkum – zejména v~kontextu pasivního monitoringu, analýzy šifrovaného provozu a nasazení v~edge prostředích. Dále by bylo vhodné zkoumat možnosti rozšíření sady příznaků, robustnější trénovací přístupy a metody kombinace s~jinými modalitami pro zvýšení odolnosti vůči rozdílům v~distribuci dat mezi sadami.
+
+
+
+
+
+
+\chapter{Výsledky analýzy SHAP}
+\label{sec:appendix-shap}
+
+Analýza Shapleyho hodnot (SHAP) poskytuje hlubší pohled na to, jak jednotlivé příznaky přispívají k~rozhodování konkrétních modelů. Následující grafy znázorňují distribuci hodnot SHAP pro každý model zvlášť.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=1.0\textwidth]{obrazky-figures/shap_feedforward.png}
+    \caption{Přínos jednotlivých příznaků pro model FFNN}
+    \label{fig:shap_feedforward}
+\end{figure}
+
+Model FFNN klade největší důraz na příznaky z~oblasti RDAP  \texttt{rdap\_domain\_age}) a lexikálních znaků domény (např. \texttt{lex\_tld\_abuse\_score}). Dále je patrný vliv vybraných TLS atributů, i když jejich dopad je ve srovnání s~ostatními kategoriemi menší.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=1.0\textwidth]{obrazky-figures/shap_Lgbm.png}
+    \caption{Přínos jednotlivých příznaků pro model LightGBM}
+    \label{fig:shap_Lgbm}
+\end{figure}
+
+U~modelu LightGBM dominují atributy z~RDAP oblasti a DNS záznamy, přičemž příznak \texttt{rdap\_ip\_v4\_count} patří mezi nejvýznamnější. Rovněž se zde více uplatňuje informační entropie z~IP a DNS zón.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=1.0\textwidth]{obrazky-figures/shap_XgBoost.png}
+    \caption{Přínos jednotlivých příznaků pro model XGBoost}
+    \label{fig:shap_XgBoost}
+\end{figure}
+
+Model XGBoost se opírá o~podobné sady příznaků, nicméně více zvýrazňuje lexikální znaky druhé úrovně domény (např. \texttt{lex\_sld\_digit\_count}) a specifické TLS vlastnosti jako \texttt{tls\_CA\_certs\_in\_chain\_ratio}. Příznaky z~RDAP oblasti zůstávají důležitým základem.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=1.0\textwidth]{obrazky-figures/shap_svm.png}
+    \caption{Přínos jednotlivých příznaků pro model SVM}
+    \label{fig:shap_svm}
+\end{figure}
+
+SVM model rovněž ukazuje silnou závislost na RDAP příznacích (věk domény, délka registrace), doplněnou o~lexikální charakteristiky a síťové vlastnosti. Model reflektuje robustní schopnost klasifikace při kombinaci více typů příznaků.
+
+\section*{Přínos všech příznaků napříč modely}
+
+Kromě pohledu na jednotlivé modely byla provedena agregovaná analýza SHAP hodnot napříč celou klasifikační pipeline.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=1.0\textwidth]{obrazky-figures/all_shap.png}
+    \caption{Průměrný SHAP přínos všech příznaků, barevně rozlišen dle kategorií}
+    \label{fig:all_shap}
+\end{figure}
+
+Na obrázku \ref{fig:all_shap} jsou jednotlivé příznaky seřazeny dle jejich průměrného přínosu k~rozhodování. Dominují především příznaky z~RDAP oblasti, následované IP a lexikálními znaky. Barevné označení umožňuje sledovat, které kategorie přispívají nejvíce, a zároveň ukazuje značný pokles důležitosti u~DNS, GEO a TLS příznaků.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{obrazky-figures/shap_cat.png}
+    \caption{Průměrný přínos příznaků dle kategorií}
+    \label{fig:shap_cat}
+\end{figure}
+
+Konečný souhrn na obrázku \ref{fig:shap_cat} kvantifikuje průměrný přínos jednotlivých kategorií. Nejvyšší přínos vykazují RDAP příznaky, následované IP a lexikálními znaky domény. Naopak TLS a GEO atributy měly relativně nízký vliv, což naznačuje jejich omezenou roli v~celkové klasifikaci. Tyto poznatky mohou být vodítkem pro budoucí redukci dimenze nebo návrh specializovaných klasifikátorů pro jednotlivé kategorie.
+
+
+
+
+
+
+
+
+
+
+\chapter{Měření klasifikace dle podmnožin}
+\label{sec:appendix-results}
+
+Tato příloha obsahuje kompletní výsledky všech měření samostatných i agregovaných subsetů příznaků pro klasifikaci phishingových a malware domén.
+
+Každý výstup zobrazuje přesnost jednotlivých klasifikačních algoritmů na dané kombinaci příznaků, zvlášť pro phishing a zvlášť pro malware. Měření byla provedena podle metodologie popsané v~kapitole \textbf{Předběžná analýza podmnožin příznaků}, kde byl popsán postup automatizovaného trénování modelů pomocí knihovny \texttt{PyCaret}. Cílem bylo identifikovat optimální kombinace atributů a klasifikátorů pro detekci škodlivých domén.
+
+\subsection*{Použité klasifikátory}
+
+Následující tabulka obsahuje zkratky používané v~jednotlivých výstupech a jejich odpovídající plné názvy modelů. Tyto zkratky byly zvoleny pro zajištění přehlednosti a úsporu místa ve výstupech.
+
+\begin{table}[H]
+    \centering
+    \caption{Zkratky použitých klasifikátorů}
+    \label{tab:model_abbreviations}
+    \begin{tabular}{|l|l|l|}
+        \hline
+        \textbf{Zkratka} & \textbf{Plný název} & \textbf{Poznámka} \\
+        \hline
+        \texttt{RF} & Random Forest Classifier & Ensemble \\
+        \texttt{ADA} & Ada Boost Classifier & Ensemble \\
+        \texttt{DT} & Decision Tree Classifier & Interpretable \\
+        \texttt{Ridge} & Ridge Classifier & Linear model \\
+        \texttt{KNN} & K~Neighbors Classifier & Instance-based \\
+        \texttt{SVM-L} & SVM - Linear Kernel & Linear SVM \\
+        \texttt{LR} & Logistic Regression & Linear model \\
+        \texttt{QDA} & Quadratic Discriminant Analysis & Probabilistic \\
+        \texttt{NB} & Naive Bayes & Probabilistic \\
+        \texttt{ET} & Extra Trees Classifier & Ensemble \\
+        \texttt{XGB} & Extreme Gradient Boosting & Boosted Trees \\
+        \texttt{LGBM} & Light Gradient Boosting Machine & Boosted Trees \\
+        \texttt{GBC} & Gradient Boosting Classifier & Boosted Trees \\
+        \texttt{LDA} & Linear Discriminant Analysis & Probabilistic \\
+        \texttt{Dummy} & Dummy Classifier & Referenční baseline \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\subsection*{Komentář k~výstupům}
+
+Každá tabulka představuje výsledky pro konkrétní subset příznaků a typ útoku (phishing nebo malware).  
+Metody jsou porovnávány dle hlavních metrik klasifikace: přesnost (\textbf{Acc}), plocha pod ROC křivkou (\textbf{AUC}), \textbf{Recall}, \textbf{Precision}, \textbf{F1 skóre}, Cohenova \textbf{Kappa} a \textbf{Matthews Correlation Coefficient} (MCC).
+
+Díky oddělení výsledků pro phishing a malware je možné detailně porovnat účinnost jednotlivých přístupů pro různé typy útoků a rozhodnout o~vhodné strategii nasazení.
+
+\bigskip
+
+\input{full_tables}
+
+
+
+
+

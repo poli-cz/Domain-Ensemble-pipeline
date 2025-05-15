@@ -1,0 +1,313 @@
+\begin{longtable}{@{}ll@{}}
+\caption{Overview of used features}\\
+\toprule
+\textbf{Feature name} & \textbf{Description} \\
+\midrule
+\endfirsthead
+
+\toprule
+\textbf{Feature name} & \textbf{Description} \\
+\midrule
+\endhead
+
+\midrule
+\multicolumn{2}{r}{\textit{Continued on next page}} \\
+\midrule
+\endfoot
+
+\bottomrule
+\endlastfoot
+
+\multicolumn{2}{l}{\emph{Lexical features (lex\_)}} \\
+lex\_name\_len & Length of the domain name \\
+lex\_has\_digit & True if domain name contains a digit \\
+lex\_phishing\_keyword\_count & Number of phishing keywords found \\
+lex\_benign\_keyword\_count & Number of benign keywords found \\
+lex\_consecutive\_chars & Longest consecutive character sequence \\
+lex\_tld\_len & Length of the TLD \\
+lex\_tld\_abuse\_score & Abuse score of the TLD \\
+lex\_tld\_hash & Hash of the TLD \\
+lex\_sld\_len & Length of the SLD \\
+lex\_sld\_norm\_entropy & Normalised entropy of the SLD \\
+lex\_sld\_digit\_count & Number of digits in the SLD \\
+lex\_sld\_digit\_ratio & Ratio of digits in the SLD \\
+lex\_sld\_phishing\_keyword\_count & Number of phishing keywords in SLD \\
+lex\_sld\_vowel\_count & Number of vowels in SLD \\
+lex\_sld\_vowel\_ratio & Ratio of vowels in SLD \\
+lex\_sld\_consonant\_count & Number of consonants in SLD \\
+lex\_sld\_consonant\_ratio & Ratio of consonants in SLD \\
+lex\_sld\_non\_alphanum\_count & Number of non-alphanumeric chars in SLD \\
+lex\_sld\_non\_alphanum\_ratio & Ratio of non-alphanumeric chars in SLD \\
+lex\_sld\_hex\_count & Number of hex characters in SLD \\
+lex\_sld\_hex\_ratio & Ratio of hex characters in SLD \\
+lex\_sub\_count & Number of subdomains \\
+lex\_stld\_unique\_char\_count & Unique characters in TLD+SLD \\
+lex\_begins\_with\_digit & True if domain begins with digit \\
+lex\_www\_flag & True if domain starts with 'www' \\
+lex\_sub\_max\_consonant\_len & Longest consonant sequence in subdomain \\
+lex\_sub\_norm\_entropy & Normalised entropy of subdomains \\
+lex\_sub\_digit\_count & Number of digits in subdomains \\
+lex\_sub\_digit\_ratio & Ratio of digits in subdomains \\
+lex\_sub\_vowel\_count & Number of vowels in subdomains \\
+lex\_sub\_vowel\_ratio & Ratio of vowels in subdomains \\
+lex\_sub\_consonant\_count & Number of consonants in subdomains \\
+lex\_sub\_consonant\_ratio & Ratio of consonants in subdomains \\
+lex\_sub\_non\_alphanum\_count & Non-alphanumeric count in subdomains \\
+lex\_sub\_non\_alphanum\_ratio & Ratio of non-alphanumerics in subdomains \\
+lex\_sub\_hex\_count & Hex characters in subdomains \\
+lex\_sub\_hex\_ratio & Ratio of hex in subdomains \\
+lex\_phishing\_bigram\_matches & Phishing bigram matches \\
+lex\_phishing\_trigram\_matches & Phishing trigram matches \\
+lex\_phishing\_tetragram\_matches & Phishing tetragram matches \\
+lex\_phishing\_pentagram\_matches & Phishing pentagram matches \\
+lex\_malware\_bigram\_matches & Malware bigram matches \\
+lex\_malware\_trigram\_matches & Malware trigram matches \\
+lex\_malware\_tetragram\_matches & Malware tetragram matches \\
+lex\_dga\_bigram\_matches & DGA bigram matches \\
+lex\_dga\_trigram\_matches & DGA trigram matches \\
+lex\_dga\_tetragram\_matches & DGA tetragram matches \\
+lex\_avg\_part\_len & Average part length \\
+lex\_stdev\_part\_lens & Standard deviation of part lengths \\
+lex\_longest\_part\_len & Longest domain part length \\
+lex\_short\_part\_count & Count of short domain parts \\
+lex\_medium\_part\_count & Count of medium domain parts \\
+lex\_long\_part\_count & Count of long domain parts \\
+lex\_superlong\_part\_count & Count of superlong domain parts \\
+lex\_shortest\_sub\_len & Shortest subdomain length \\
+lex\_ipv4\_in\_domain & True if IPv4 in domain name \\
+lex\_has\_trusted\_suffix & True if trusted suffix used \\
+lex\_has\_wellknown\_suffix & True if well-known suffix used \\
+lex\_has\_cdn\_suffix & True if CDN suffix used \\
+lex\_has\_vps\_suffix & True if VPS suffix used \\
+lex\_has\_img\_suffix & True if image suffix used \\
+lex\_suffix\_score & Computed suffix score \\
+
+\midrule
+\multicolumn{2}{l}{\emph{DNS-based features (dns\_)}} \\
+dns\_has\_dnskey & DNSKEY record present \\
+dns\_A\_count & Number of A records \\
+dns\_AAAA\_count & Number of AAAA records \\
+dns\_MX\_count & Number of MX records \\
+dns\_NS\_count & Number of NS records \\
+dns\_TXT\_count & Number of TXT records \\
+dns\_SOA\_count & Number of SOA records \\
+dns\_CNAME\_count & Number of CNAME records \\
+dns\_zone\_level & Zone domain level \\
+dns\_zone\_digit\_count & Digits in zone domain \\
+dns\_zone\_len & Zone domain length \\
+dns\_zone\_entropy & Zone domain entropy \\
+dns\_resolved\_record\_types & Number of RR types resolved \\
+dns\_dnssec\_score & DNSSEC score (always zero) \\
+dns\_ttl\_avg & Average TTL \\
+dns\_ttl\_stdev & TTL standard deviation \\
+dns\_ttl\_low & Count of TTL in [0,100] \\
+dns\_ttl\_mid & Count of TTL in [101,500] \\
+dns\_ttl\_distinct\_count & Distinct TTL values \\
+dns\_soa\_primary\_ns\_level & Primary NS domain level \\
+dns\_soa\_primary\_ns\_digit\_count & Digits in primary NS \\
+dns\_soa\_primary\_ns\_len & Length of primary NS domain \\
+dns\_soa\_primary\_ns\_entropy & Entropy of primary NS domain \\
+dns\_soa\_email\_level & Admin email domain level \\
+dns\_soa\_email\_digit\_count & Digits in admin email domain \\
+dns\_soa\_email\_len & Length of admin email domain \\
+dns\_soa\_email\_entropy & Entropy of admin email domain \\
+dns\_soa\_refresh & SOA refresh value \\
+dns\_soa\_retry & SOA retry value \\
+dns\_soa\_expire & SOA expire value \\
+dns\_soa\_min\_ttl & SOA minimum TTL \\
+dns\_domain\_name\_in\_mx & MX is a subdomain of domain \\
+dns\_mx\_avg\_len & Average length of MX names \\
+dns\_mx\_avg\_entropy & Average entropy of MX names \\
+dns\_txt\_avg\_len & Average TXT record length \\
+dns\_txt\_avg\_entropy & Average entropy of TXT records \\
+dns\_txt\_external\_verification\_score & Known verification strings in TXT \\
+dns\_txt\_spf\_exists & SPF found in TXT records \\
+dns\_txt\_dkim\_exists & DKIM found in TXT records \\
+dns\_txt\_dmarc\_exists & DMARC found in TXT records \\
+
+% Here the table would continue further: ip_, tls_, geo_, rdap_, html_
+\midrule
+\multicolumn{2}{l}{\emph{IP-based features (ip\_)}} \\
+ip\_count & Number of IP addresses \\
+ip\_mean\_average\_rtt & Average round-trip time (ICMP) \\
+ip\_v4\_ratio & IPv4 to all IPs ratio \\
+ip\_a\_aaaa\_to\_all\_ratio & A/AAAA to all IPs ratio \\
+ip\_entropy & Entropy of IP prefixes (/16 and /64) \\
+ip\_as\_address\_entropy & Entropy of AS address prefixes \\
+ip\_asn\_entropy & Entropy of ASN numbers \\
+ip\_distinct\_as\_count & Number of distinct ASNs \\
+
+\midrule
+\multicolumn{2}{l}{\emph{TLS-based features (tls\_)}} \\
+tls\_has\_tls & True if TLS connection established \\
+tls\_chain\_len & Certificate chain length \\
+tls\_is\_self\_signed & True if certificate is self-signed \\
+tls\_root\_authority\_hash & Hash of root authority name \\
+tls\_leaf\_authority\_hash & Hash of leaf authority name \\
+tls\_negotiated\_version\_id & Negotiated TLS version ID \\
+tls\_negotiated\_cipher\_id & Negotiated TLS cipher ID \\
+tls\_root\_cert\_validity\_len & Root certificate validity period \\
+tls\_leaf\_cert\_validity\_len & Leaf certificate validity period \\
+tls\_broken\_chain & Broken certificate chain present \\
+tls\_expired\_chain & Expired certificate present \\
+tls\_total\_extension\_count & Total number of certificate extensions \\
+tls\_critical\_extensions & Number of critical extensions \\
+tls\_with\_policies\_crt\_count & Number of certificates with policies \\
+tls\_percentage\_crt\_with\_policies & certificates with policies \\
+
+tls\_x509\_anypolicy\_crt\_count & Certificates with anyPolicy extension \\
+tls\_iso\_policy\_crt\_count & ISO policy certificates (OID 1.\*) \\
+tls\_joint\_isoitu\_policy\_crt\_count & Joint ISO-ITU policies (OID 2.\*) \\
+tls\_subject\_count & Subject alternative names count \\
+tls\_server\_auth\_crt\_count & Server authentication certificates \\
+tls\_client\_auth\_crt\_count & Client authentication certificates \\
+tls\_CA\_certs\_in\_chain\_ratio & CA certificates to all certificates ratio \\
+tls\_unique\_SLD\_count & Unique second-level domains (SANs) \\
+tls\_common\_name\_count & Number of common names in certificates \\
+
+\midrule
+\multicolumn{2}{l}{\emph{Geolocation-based features (geo\_)}} \\
+geo\_countries\_count & Number of distinct countries \\
+geo\_continents\_count & Number of distinct continents \\
+geo\_malic\_host\_country & Number of IPs from malicious countries \\
+geo\_lat\_stdev & Latitude standard deviation \\
+geo\_lon\_stdev & Longitude standard deviation \\
+geo\_mean\_lat & Mean latitude \\
+geo\_mean\_lon & Mean longitude \\
+geo\_min\_lat & Minimum latitude \\
+geo\_max\_lat & Maximum latitude \\
+geo\_min\_lon & Minimum longitude \\
+geo\_max\_lon & Maximum longitude \\
+geo\_lat\_range & Latitude range \\
+geo\_lon\_range & Longitude range \\
+geo\_centroid\_lat & Centroid latitude \\
+geo\_centroid\_lon & Centroid longitude \\
+geo\_estimated\_area & Estimated area \\
+geo\_continent\_hash & Hash of continents \\
+geo\_countries\_hash & Hash of countries \\
+
+\midrule
+\multicolumn{2}{l}{\emph{Domain RDAP features (rdap\_)}} \\
+rdap\_registration\_period & Domain registration period \\
+rdap\_domain\_age & Domain age (days) \\
+rdap\_time\_from\_last\_change & Time since last change \\
+rdap\_domain\_active\_time & Active time of the domain \\
+rdap\_has\_dnssec & True if DNSSEC enabled (RDAP) \\
+rdap\_registrar\_name\_len & Length of registrar's name \\
+rdap\_registrar\_name\_entropy & Entropy of registrar's name \\
+rdap\_registrar\_name\_hash & Hash of registrar's name \\
+rdap\_registrant\_name\_len & Length of registrant's name \\
+rdap\_registrant\_name\_entropy & Entropy of registrant's name \\
+rdap\_admin\_name\_len & Length of admin contact's name \\
+rdap\_admin\_name\_entropy & Entropy of admin contact's name \\
+rdap\_admin\_email\_len & Length of admin email \\
+rdap\_admin\_email\_entropy & Entropy of admin email \\
+
+\midrule
+\multicolumn{2}{l}{\emph{IP RDAP features (rdap\_ip\_)}} \\
+rdap\_ip\_v4\_count & IPv4 addresses with RDAP data \\
+rdap\_ip\_v6\_count & IPv6 addresses with RDAP data \\
+rdap\_ip\_shortest\_v4\_prefix\_len & Shortest IPv4 prefix length \\
+rdap\_ip\_longest\_v4\_prefix\_len & Longest IPv4 prefix length \\
+rdap\_ip\_shortest\_v6\_prefix\_len & Shortest IPv6 prefix length \\
+rdap\_ip\_longest\_v6\_prefix\_len & Longest IPv6 prefix length \\
+rdap\_ip\_avg\_admin\_name\_len & Avg. length of admins' names \\
+rdap\_ip\_avg\_admin\_name\_entropy & Avg. entropy of admins' names \\
+rdap\_ip\_avg\_admin\_email\_len & Avg. length of admins' emails \\
+rdap\_ip\_avg\_admin\_email\_entropy & Avg. entropy of admins' emails \\
+
+\midrule
+\multicolumn{2}{l}{\emph{HTML-based features (html\_)}} \\
+html\_num\_of\_tags & Total number of HTML tags \\
+html\_num\_of\_paragraphs & Number of \texttt{<p>} tags \\
+html\_num\_of\_divs & Number of \texttt{<div>} tags \\
+html\_num\_of\_titles & Number of \texttt{<title>} tags \\
+html\_num\_of\_external\_js & External JavaScript files \\
+html\_num\_of\_links & Number of \texttt{<link>} tags \\
+html\_num\_of\_scripts & Number of \texttt{<script>} tags \\
+html\_num\_of\_scripts\_async & Async scripts count \\
+html\_num\_of\_scripts\_type & Scripts with explicit type \\
+html\_num\_of\_anchors & Number of anchors (\texttt{<a>}) \\
+html\_num\_of\_anchors\_to\_hash & Anchors to \# fragments \\
+html\_num\_of\_anchors\_to\_https & Anchors to HTTPS links \\
+html\_num\_of\_anchors\_to\_com & Anchors to .com domains \\
+html\_num\_of\_inputs & Number of input fields \\
+html\_num\_of\_input\_password & Password inputs \\
+html\_num\_of\_hidden\_elements & Hidden elements \\
+html\_num\_of\_input\_hidden & Hidden input fields \\
+html\_num\_of\_objects & Number of \texttt{<object>} tags \\
+html\_num\_of\_embeds & Number of \texttt{<embed>} tags \\
+html\_num\_of\_frame & Number of \texttt{<frame>} tags \\
+html\_num\_of\_iframe & Number of \texttt{<iframe>} tags \\
+html\_num\_of\_iframe\_src & iFrame with \texttt{src} attribute \\
+html\_num\_of\_iframe\_src\_https & iFrame to HTTPS source \\
+
+% (CONTINUES! Next message →)
+html\_num\_of\_center & Number of \texttt{<center>} tags \\
+html\_num\_of\_imgs & Number of images (\texttt{<img>}) \\
+html\_num\_of\_imgs\_src & Images with \texttt{src} attribute \\
+html\_num\_of\_meta & Number of \texttt{<meta>} tags \\
+html\_num\_of\_links\_href & Links with \texttt{href} \\
+html\_num\_of\_links\_href\_https & Links to HTTPS targets \\
+html\_num\_of\_links\_href\_css & Links to CSS stylesheets \\
+html\_num\_of\_links\_type & Links with \texttt{type} attribute \\
+html\_num\_of\_link\_type\_app & Links to application types \\
+html\_num\_of\_link\_rel & Links with \texttt{rel} attribute \\
+html\_num\_of\_all\_hrefs & Total href attributes \\
+html\_num\_of\_form\_action & Forms with an action attribute \\
+html\_num\_of\_form\_http & Forms posting to HTTP (non-HTTPS) \\
+html\_num\_of\_strong & Number of \texttt{<strong>} tags \\
+html\_no\_hrefs & True if no hrefs found \\
+html\_internal\_href\_ratio & Internal href ratio \\
+html\_num\_of\_internal\_hrefs & Number of internal hrefs \\
+html\_external\_href\_ratio & External href ratio \\
+html\_num\_of\_external\_href & Number of external hrefs \\
+html\_num\_of\_icon & Number of icons \\
+html\_icon\_external & External icon usage \\
+html\_num\_of\_form\_php & Forms targeting PHP files \\
+html\_num\_of\_form\_hash & Forms submitting to \# fragments \\
+html\_num\_of\_form\_js & Forms submitting to JavaScript \\
+html\_malicious\_form & Malicious form detection \\
+html\_most\_common & Most common HTML tag used \\
+html\_num\_of\_css\_internal & Number of internal CSS styles \\
+html\_num\_of\_css\_external & Number of external CSS links \\
+html\_num\_of\_anchors\_to\_content & Anchors pointing to page content \\
+html\_num\_of\_anchors\_to\_void & Anchors with void targets \\
+html\_num\_of\_words & Total number of words \\
+html\_num\_of\_lines & Total number of lines \\
+html\_unique\_words & Number of unique words \\
+html\_average\_word\_len & Average word length \\
+html\_blocked\_keywords\_label & Presence of blocked keywords \\
+html\_num\_of\_blank\_spaces & Number of blank spaces \\
+html\_create\_element & Usage of \texttt{createElement} \\
+html\_write & Usage of \texttt{document.write} \\
+html\_char\_code\_at & Usage of \texttt{charCodeAt} \\
+html\_concat & Usage of \texttt{concat} function \\
+html\_escape & Usage of \texttt{escape} function \\
+html\_eval & Usage of \texttt{eval} \\
+html\_exec & Usage of \texttt{exec} \\
+html\_from\_char\_code & Usage of \texttt{fromCharCode} \\
+html\_link & Usage of \texttt{link} \\
+html\_parse\_int & Usage of \texttt{parseInt} \\
+html\_replace & Usage of \texttt{replace} \\
+html\_search & Usage of \texttt{search} \\
+html\_substring & Usage of \texttt{substring} \\
+html\_unescape & Usage of \texttt{unescape} \\
+html\_add\_event\_listener & Usage of \texttt{addEventListener} \\
+html\_set\_interval & Usage of \texttt{setInterval} \\
+html\_set\_timeout & Usage of \texttt{setTimeout} \\
+html\_push & Usage of \texttt{push} function \\
+html\_index\_of & Usage of \texttt{indexOf} function \\
+html\_document\_write & Usage of \texttt{document.write()} \\
+html\_get & Usage of \texttt{get} function \\
+html\_find & Usage of \texttt{find} function \\
+html\_document\_create\_element & Usage of \texttt{document.createElement()} \\
+html\_window\_set\_timeout & Usage of \texttt{window.setTimeout()} \\
+html\_window\_set\_interval & Usage of \texttt{window.setInterval()} \\
+html\_hex\_encoding & Hexadecimal string encoding detected \\
+html\_unicode\_encoding & Unicode escape encoding detected \\
+html\_long\_variable\_name & Long variable names used \\
+
+\end{longtable}
+
+
